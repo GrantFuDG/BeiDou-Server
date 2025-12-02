@@ -204,7 +204,7 @@ public abstract class AbstractDealDamageHandler extends AbstractPacketHandler {
                 }
 
                 if (attack.numAttacked > mobCount) {
-                    AutobanFactory.MOB_COUNT.autoban(player, "技能: " + attack.skill + "; Count: " + attack.numAttacked + " Max: " + attackEffect.getMobCount());
+                    AutobanFactory.MOB_COUNT.autoban(player, "技能: " + attack.skill + "; Count: " + attack.numAttacked + " Max: " + mobCount);
                     return;
                 }
             }
