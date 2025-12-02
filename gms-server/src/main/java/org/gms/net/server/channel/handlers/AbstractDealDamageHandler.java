@@ -193,6 +193,11 @@ public abstract class AbstractDealDamageHandler extends AbstractPacketHandler {
                                 mobCount = 12;
                             }
                         }
+                        
+                        // Multicast: Infinity buff doubles mobCount for magic attacks
+                        if (attack.magic && player.getBuffedValue(BuffStat.INFINITY) != null) {
+                            mobCount *= 2;
+                        }
                     } else {
                         player.sendPacket(PacketCreator.enableActions());
                     }
