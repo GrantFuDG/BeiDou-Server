@@ -80,7 +80,14 @@ public final class MagicDamageHandler extends AbstractDealDamageHandler {
                 chr.addCooldown(attack.skill, currentServerTime(), SECONDS.toMillis(effect_.getCooldown()));
             }
         }
-        applyAttack(attack, chr, effect.getAttackCount());
+        
+        // Multicast: Infinity buff doubles attackCount for magic attacks
+        int attackCount = effect.getAttackCount();
+        if (chr.getBuffedValue(BuffStat.INFINITY) != null) {
+            attackCount *= 2;
+        }
+        
+        applyAttack(attack, chr, attackCount);
         Skill eaterSkill = SkillFactory.getSkill((chr.getJob().getId() - (chr.getJob().getId() % 10)) * 10000);// MP Eater, works with right job
         int eaterLevel = chr.getSkillLevel(eaterSkill);
         if (eaterLevel > 0) {
