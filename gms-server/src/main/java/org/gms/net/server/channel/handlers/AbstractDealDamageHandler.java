@@ -193,18 +193,13 @@ public abstract class AbstractDealDamageHandler extends AbstractPacketHandler {
                                 mobCount = 12;
                             }
                         }
-                        
-                        // Multicast: Infinity buff doubles mobCount for magic attacks
-                        if (attack.magic && player.getBuffedValue(BuffStat.INFINITY) != null) {
-                            mobCount *= 2;
-                        }
                     } else {
                         player.sendPacket(PacketCreator.enableActions());
                     }
                 }
 
                 if (attack.numAttacked > mobCount) {
-                    AutobanFactory.MOB_COUNT.autoban(player, "技能: " + attack.skill + "; Count: " + attack.numAttacked + " Max: " + mobCount);
+                    AutobanFactory.MOB_COUNT.autoban(player, "技能: " + attack.skill + "; Count: " + attack.numAttacked + " Max: " + attackEffect.getMobCount());
                     return;
                 }
             }
